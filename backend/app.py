@@ -10,7 +10,7 @@ CORS(app)
 connection = pymysql.connect(
     host='localhost',
     user='root',
-    password='12943@a',
+    password='YOUR_PASSWORD',
     database='analytics_dashboard'
 )
 
