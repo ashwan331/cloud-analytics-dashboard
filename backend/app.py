@@ -1,9 +1,11 @@
 from flask import Flask, jsonify
-import pymysql
 from flask_cors import CORS
+import pymysql
+import os
 
 app = Flask(__name__)
 CORS(app)
+
 # MySQL Connection
 connection = pymysql.connect(
     host='localhost',
@@ -12,11 +14,12 @@ connection = pymysql.connect(
     database='analytics_dashboard'
 )
 
+# Home Route
 @app.route('/')
 def home():
-    return "Backend Running Successfully"
+    return "Cloud Analytics Dashboard Backend Running Successfully"
 
-# API Route
+# Sales API
 @app.route('/sales')
 def get_sales():
 
@@ -30,5 +33,7 @@ def get_sales():
 
     return jsonify(data)
 
+# Run Flask App
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
